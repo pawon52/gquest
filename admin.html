@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Area Penjual — Grammar Quest</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0E2430; --paper:#F2F7F5; --white:#fff; --ink:#12313F; --ink-2:#55707C;
+  --line:#D3E3E0; --mango:#FFB020; --coral:#FF6B5A; --leaf:#2FB37A;
+  --display:'Fredoka',ui-rounded,sans-serif; --body:'Nunito',ui-rounded,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:var(--body);background:var(--paper);color:var(--ink);
+  display:grid;place-items:center;padding:24px}
+.box{background:var(--white);border:2px solid var(--line);border-radius:24px;padding:28px;max-width:480px;width:100%}
+h1{font-family:var(--display);font-weight:600;font-size:22px;margin:0 0 6px}
+p{color:var(--ink-2);font-size:14.5px;line-height:1.6;margin:0 0 16px}
+label{display:block;font-family:var(--display);font-size:13.5px;margin-bottom:6px}
+input,select{width:100%;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--paper);
+  color:var(--ink);font-family:var(--body);font-size:15px;margin-bottom:14px}
+button{width:100%;font-family:var(--display);font-size:16px;font-weight:600;padding:13px;border-radius:999px;
+  border:none;cursor:pointer;background:var(--ink);color:var(--paper);box-shadow:0 5px 0 rgba(0,0,0,.25)}
+button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+button.alt{background:transparent;border:2px solid var(--line);color:var(--ink-2);box-shadow:none;margin-top:10px}
+button.alt:active{transform:none}
+button[disabled]{opacity:.5;pointer-events:none}
+.msg{font-size:14px;font-weight:700;min-height:20px;margin:-4px 0 14px}
+.msg.bad{color:var(--coral)} .msg.good{color:var(--leaf)}
+.codes{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px;line-height:2;background:var(--paper);
+  border-radius:12px;padding:14px;margin:14px 0;word-spacing:6px;border:1px solid var(--line)}
+.note{font-size:12.5px;color:var(--ink-2);line-height:1.6;margin-top:16px}
+.back{display:inline-block;margin-top:16px;font-size:13.5px;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<div class="box">
+  <div id="loginView">
+    <h1>🔑 Area Penjual</h1>
+    <p>Halaman ini untuk membuat PIN baru bagi pembeli. Kunci admin diperiksa oleh server, bukan disimpan di halaman ini.</p>
+    <label for="key">Kunci admin</label>
+    <input id="key" type="password" autocomplete="off" placeholder="Masukkan kunci admin">
+    <div class="msg" id="loginMsg"></div>
+    <button id="loginBtn">Masuk</button>
+  </div>
+
+  <div id="genView" style="display:none">
+    <h1>PIN siap kirim</h1>
+    <p>Setiap PIN di bawah ini sudah tersimpan di database dan langsung sah dipakai pembeli.</p>
+    <label for="count">Jumlah PIN dibuat</label>
+    <select id="count">
+      <option value="5">5 PIN</option>
+      <option value="10" selected>10 PIN</option>
+      <option value="25">25 PIN</option>
+      <option value="50">50 PIN</option>
+    </select>
+    <button id="genBtn">Buat PIN baru</button>
+    <div class="msg" id="genMsg"></div>
+    <div class="codes" id="codes" style="display:none"></div>
+    <button class="alt" id="copyBtn" style="display:none">Salin semua</button>
+    <button class="alt" id="logoutBtn">Keluar</button>
+    <p class="note">
+      Untuk mencabut PIN yang bocor atau melihat riwayat pemakaian, jalankan perintah SQL
+      langsung di tab Console pada database D1 Anda — lihat contoh di berkas <code>schema.sql</code>.
+    </p>
+  </div>
+
+  <a class="back" href="./index.html">← Kembali ke halaman utama</a>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const SKEY = 'gq.admin.key'; // hanya disimpan di sessionStorage: hilang saat tab ditutup
+
+async function callApi(count){
+  const key = sessionStorage.getItem(SKEY) || '';
+  const res = await fetch('/api/admin/generate', {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json', 'Authorization': 'Bearer ' + key },
+    body: JSON.stringify({ count })
+  });
+  const data = await res.json();
+  return { status: res.status, data };
+}
+
+function showGen(){
+  $('#loginView').style.display = 'none';
+  $('#genView').style.display = 'block';
+}
+
+$('#loginBtn').addEventListener('click', async ()=>{
+  const key = $('#key').value.trim();
+  const msg = $('#loginMsg');
+  if (!key){ msg.className='msg bad'; msg.textContent='Isi kunci admin dulu.'; return; }
+  sessionStorage.setItem(SKEY, key);
+
+  $('#loginBtn').setAttribute('disabled','');
+  msg.className='msg'; msg.textContent='Memeriksa…';
+  try {
+    const { data } = await callApi(0); // 0 = hanya periksa kunci, tidak membuat PIN
+    $('#loginBtn').removeAttribute('disabled');
+    if (data.ok){
+      showGen();
+    } else if (data.error === 'locked'){
+      msg.className='msg bad'; msg.textContent = `Terlalu banyak percobaan. Coba lagi dalam ${data.minutes} menit.`;
+      sessionStorage.removeItem(SKEY);
+    } else {
+      msg.className='msg bad';
+      msg.textContent = data.left != null ? `Kunci salah. Sisa ${data.left} percobaan.` : 'Kunci salah.';
+      sessionStorage.removeItem(SKEY);
+    }
+  } catch (e){
+    $('#loginBtn').removeAttribute('disabled');
+    msg.className='msg bad'; msg.textContent='Tidak bisa terhubung ke server.';
+    sessionStorage.removeItem(SKEY);
+  }
+});
+$('#key').addEventListener('keydown', e=>{ if (e.key==='Enter') $('#loginBtn').click(); });
+
+function renderCodes(codes){
+  const box = $('#codes');
+  box.style.display = 'block';
+  box.textContent = codes.join('  ');
+  $('#copyBtn').style.display = 'block';
+}
+
+$('#genBtn').addEventListener('click', async ()=>{
+  const count = parseInt($('#count').value, 10);
+  const msg = $('#genMsg');
+  $('#genBtn').setAttribute('disabled',''); msg.className='msg'; msg.textContent='Membuat PIN…';
+  try {
+    const { data } = await callApi(count);
+    $('#genBtn').removeAttribute('disabled');
+    if (data.ok){ msg.textContent=''; renderCodes(data.codes); }
+    else if (data.error === 'locked'){ msg.className='msg bad'; msg.textContent = `Terkunci ${data.minutes} menit.`; }
+    else { msg.className='msg bad'; msg.textContent = 'Kunci admin tidak lagi berlaku, silakan masuk ulang.'; }
+  } catch(e){
+    $('#genBtn').removeAttribute('disabled');
+    msg.className='msg bad'; msg.textContent='Tidak bisa terhubung ke server.';
+  }
+});
+
+$('#copyBtn').addEventListener('click', ()=>{
+  const txt = $('#codes').textContent.trim().split(/\s+/).join('\n');
+  navigator.clipboard?.writeText(txt).then(()=>{
+    $('#copyBtn').textContent='Tersalin ✓'; setTimeout(()=>$('#copyBtn').textContent='Salin semua',1500);
+  });
+});
+
+$('#logoutBtn').addEventListener('click', ()=>{
+  sessionStorage.removeItem(SKEY);
+  $('#genView').style.display='none'; $('#loginView').style.display='block';
+  $('#key').value=''; $('#loginMsg').textContent=''; $('#key').focus();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grammar Quest — Aplikasi Grammar Bahasa Inggris untuk Anak 7–12 Tahun</title>
+<meta name="description" content="Aplikasi belajar grammar Bahasa Inggris untuk anak 7–12 tahun. 15 unit, 165 latihan, lengkap dengan audio, menulis, dan berbicara. Bisa dipakai offline.">
+<meta name="theme-color" content="#0E2430">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0E2430; --night-2:#13303E; --paper:#F2F7F5; --white:#fff;
+  --ink:#12313F; --ink-2:#55707C; --line:#D3E3E0;
+  --mango:#FFB020; --coral:#FF6B5A; --leaf:#2FB37A; --sky:#3AA7E0; --grape:#7C5CFF;
+  --wa:#25D366;
+  --display:'Fredoka',ui-rounded,'Segoe UI',system-ui,sans-serif;
+  --body:'Nunito',ui-rounded,'Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0B1D25; --white:#14323F; --ink:#EAF6F4; --ink-2:#9DBDC6; --line:#28505F;
+}}
+:root[data-theme="dark"]{--paper:#0B1D25;--white:#14323F;--ink:#EAF6F4;--ink-2:#9DBDC6;--line:#28505F}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+button{font-family:inherit;color:inherit;border:none;background:none;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mango);outline-offset:3px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+h1,h2,h3,.dsp{font-family:var(--display);font-weight:600;margin:0;line-height:1.15}
+p{line-height:1.65;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.narrow{max-width:66ch}
+
+/* header */
+.bar{position:sticky;top:0;z-index:40;background:rgba(14,36,48,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+.bar .wrap{display:flex;align-items:center;gap:12px;padding-top:12px;padding-bottom:12px}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;color:#fff;display:flex;align-items:center;gap:9px;flex:1}
+.brand svg{width:32px;height:32px}
+.bar a{color:#CFE4EA;font-size:14.5px;font-weight:700;text-decoration:none}
+.bar .key{background:var(--mango);color:#3A2600;padding:9px 16px;border-radius:999px;font-family:var(--display);font-size:14.5px}
+
+/* hero */
+.hero{background:linear-gradient(180deg,var(--night),var(--night-2));color:#fff;padding:54px 0 64px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:44px;background:var(--paper);
+  border-radius:60% 60% 0 0/100% 100% 0 0}
+.hero .wrap{position:relative;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(255,176,32,.16);color:var(--mango);
+  font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px;margin-bottom:18px}
+.hero h1{font-size:clamp(33px,6.4vw,54px);font-weight:700;max-width:17ch}
+.hero h1 span{color:var(--mango)}
+.hero .lead{color:#C6DCE4;font-size:clamp(16px,2.4vw,19px);max-width:52ch;margin-top:16px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--display);
+  font-size:16.5px;font-weight:600;padding:15px 26px;border-radius:999px;transition:transform .12s,box-shadow .12s;
+  text-decoration:none;box-shadow:0 5px 0 rgba(0,0,0,.22)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.22)}
+.btn.buy{background:var(--mango);color:#3A2600;box-shadow:0 5px 0 #C97F00}
+.btn.buy:active{box-shadow:0 1px 0 #C97F00}
+.btn.line{background:transparent;border:2px solid rgba(255,255,255,.3);color:#fff;box-shadow:none}
+.btn.line:active{transform:translateY(2px)}
+.btn.go{background:var(--leaf);color:#fff;box-shadow:0 5px 0 #1B7A51}
+.btn.go:active{box-shadow:0 1px 0 #1B7A51}
+.btn.dark{background:var(--ink);color:var(--paper);box-shadow:0 5px 0 rgba(0,0,0,.25)}
+.btn.full{width:100%}
+.crew{display:flex;gap:6px;margin-top:34px;align-items:flex-end}
+.crew svg{width:74px;height:74px;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35))}
+.crew svg:nth-child(2){width:92px;height:92px}
+.facts{display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;color:#9FC0CB;font-size:14px;font-weight:700}
+.facts b{display:block;font-family:var(--display);font-size:27px;color:#fff;font-weight:600;line-height:1.1}
+
+/* sections */
+section{padding:58px 0}
+.kicker{font-family:var(--display);font-size:clamp(25px,4.4vw,34px);margin-bottom:12px}
+.sub{color:var(--ink-2);font-size:16.5px;margin-bottom:30px}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--white);border:2px solid var(--line);border-radius:22px;padding:22px}
+.card h3{font-size:19px;margin-bottom:7px}
+.card p{color:var(--ink-2);font-size:15px}
+.lvl{border-top:7px solid}
+.lvl .age{font-family:var(--display);font-size:13px;color:var(--ink-2);margin-bottom:4px}
+.lvl ul{margin:12px 0 0;padding-left:18px;color:var(--ink-2);font-size:14.5px;line-height:1.85}
+.skill .ic{font-size:30px;margin-bottom:10px;display:block}
+.steps{counter-reset:s;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.step{position:relative;padding-left:56px}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-4px;width:42px;height:42px;
+  border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;
+  font-family:var(--display);font-size:20px}
+.step h3{font-size:17.5px;margin-bottom:5px}
+.step p{color:var(--ink-2);font-size:15px}
+
+/* harga */
+.price-wrap{background:var(--night);color:#fff;border-radius:28px;padding:34px;display:grid;gap:26px;
+  grid-template-columns:1fr;align-items:center}
+@media(min-width:760px){.price-wrap{grid-template-columns:1.1fr .9fr;padding:42px}}
+.price-wrap h2{font-size:clamp(24px,4vw,32px)}
+.price-wrap p{color:#C6DCE4;font-size:16px;margin-top:10px}
+.tag{font-family:var(--display);font-size:clamp(34px,7vw,48px);color:var(--mango);line-height:1}
+.tag small{display:block;font-family:var(--body);font-size:14px;color:#9FC0CB;font-weight:700;margin-top:6px}
+.incl{list-style:none;margin:20px 0 0;padding:0}
+.incl li{padding-left:28px;position:relative;margin-bottom:10px;font-size:15px;color:#DCEBF0}
+.incl li::before{content:"✓";position:absolute;left:0;color:var(--leaf);font-weight:800}
+
+/* PIN */
+.gate{background:var(--white);border:2px solid var(--line);border-radius:26px;padding:28px 22px;text-align:center;
+  max-width:540px;margin:0 auto}
+.pins{display:flex;gap:8px;justify-content:center;margin:20px 0 6px}
+.pins input{width:46px;height:58px;text-align:center;font-family:var(--display);font-size:26px;
+  border:3px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);padding:0}
+.pins input:focus{border-color:var(--mango);outline:none}
+.gate.err .pins input{border-color:var(--coral);animation:shake .38s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.msg{font-size:14.5px;min-height:22px;margin-top:8px;font-weight:700}
+.msg.bad{color:var(--coral)}
+.msg.good{color:var(--leaf)}
+.gate .hint{color:var(--ink-2);font-size:14.5px}
+.ok-box{display:none}
+.ok-box.on{display:block}
+.gate.done .pin-box{display:none}
+
+/* faq */
+.faq details{background:var(--white);border:2px solid var(--line);border-radius:18px;padding:16px 20px;margin-bottom:11px}
+.faq summary{font-family:var(--display);font-size:16.5px;cursor:pointer;list-style:none;display:flex;gap:10px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"+";color:var(--coral);font-size:22px;line-height:1}
+.faq details[open] summary::before{content:"–"}
+.faq p{color:var(--ink-2);font-size:15px;margin-top:10px}
+
+footer{background:var(--night);color:#9FC0CB;padding:40px 0 110px;font-size:14px}
+footer .brand{margin-bottom:12px}
+footer a{color:#CFE4EA}
+#sellerBtn{cursor:pointer;color:inherit;text-decoration:underline dotted;text-underline-offset:3px}
+#sellerBtn:hover,#sellerBtn:focus-visible{color:#CFE4EA}
+
+/* floating WA */
+.wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;display:flex;align-items:center;gap:10px;
+  background:var(--wa);color:#063d1c;padding:13px 20px 13px 15px;border-radius:999px;text-decoration:none;
+  font-family:var(--display);font-size:15.5px;font-weight:600;box-shadow:0 8px 24px rgba(37,211,102,.42)}
+.wa svg{width:25px;height:25px;flex:none}
+.wa:active{transform:translateY(3px)}
+.wa .lbl{display:none}
+@media(min-width:520px){.wa .lbl{display:inline}}
+@keyframes ping{0%{box-shadow:0 8px 24px rgba(37,211,102,.42),0 0 0 0 rgba(37,211,102,.5)}
+ 70%{box-shadow:0 8px 24px rgba(37,211,102,.42),0 0 0 18px rgba(37,211,102,0)}
+ 100%{box-shadow:0 8px 24px rgba(37,211,102,.42),0 0 0 0 rgba(37,211,102,0)}}
+.wa{animation:ping 3.4s ease-out 2s 3}
+
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(16px);opacity:0;background:var(--ink);
+  color:var(--paper);padding:12px 18px;border-radius:999px;font-family:var(--display);font-size:15px;z-index:60;
+  transition:.25s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(6,20,27,.75);z-index:70;display:none;place-items:center;padding:20px}
+.modal.on{display:grid}
+.modal .box{background:var(--white);border-radius:22px;padding:24px;max-width:460px;width:100%;max-height:86vh;overflow:auto}
+.modal input{width:100%;padding:13px;border-radius:12px;border:2px solid var(--line);background:var(--paper);
+  color:var(--ink);font-family:var(--display);font-size:17px;margin:12px 0}
+/* testimoni */
+.tsgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.ts{background:var(--white);border:2px solid var(--line);border-radius:22px;padding:20px}
+.ts .stars{color:var(--mango);letter-spacing:2px;font-size:15px;margin-bottom:10px}
+.ts p{font-size:15px;color:var(--ink)}
+.ts .who{display:flex;align-items:center;gap:10px;margin-top:14px}
+.ts .who .av{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-family:var(--display);font-size:16px}
+.ts .who b{font-family:var(--display);font-size:14.5px;display:block}
+.ts .who small{color:var(--ink-2);font-size:12.5px}
+.trustbar{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin-top:8px;color:var(--ink-2);font-size:14px;font-weight:700}
+.trustbar b{color:var(--ink);font-family:var(--display);font-weight:600}
+
+/* konfirmasi pembayaran */
+.confirm-wrap{background:var(--white);border:2px solid var(--line);border-radius:26px;padding:30px 24px;max-width:640px;margin:0 auto}
+.confirm-wrap .steps2{display:grid;gap:10px;margin:18px 0 24px}
+.confirm-wrap .steps2 li{display:flex;gap:12px;align-items:flex-start;list-style:none;font-size:14.5px;color:var(--ink-2)}
+.confirm-wrap .steps2 li b{color:var(--ink);font-family:var(--display);font-weight:600}
+.confirm-wrap .steps2 li .n{width:26px;height:26px;border-radius:50%;background:var(--paper);border:2px solid var(--line);
+  display:grid;place-items:center;font-family:var(--display);font-size:13px;flex:none;color:var(--ink)}
+.field{margin-bottom:14px;text-align:left}
+.field label{display:block;font-family:var(--display);font-size:13.5px;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 13px;border-radius:12px;border:2px solid var(--line);
+  background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px}
+.field textarea{resize:vertical;min-height:70px}
+.confirm-wrap .note2{font-size:13px;color:var(--ink-2);margin-top:14px;line-height:1.6;text-align:center}
+.codes{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px;line-height:2;background:var(--paper);
+  border-radius:12px;padding:14px;margin-top:12px;word-spacing:6px}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand"><svg viewBox="0 0 64 64"><path d="M14 24 L12 8 L26 16 Z" fill="#FF8A4C"/><path d="M50 24 L52 8 L38 16 Z" fill="#FF8A4C"/><ellipse cx="32" cy="36" rx="22" ry="20" fill="#FF8A4C"/><ellipse cx="32" cy="42" rx="14" ry="13" fill="#FFD9BF"/><circle cx="24" cy="33" r="3.4" fill="#2A1A10"/><circle cx="40" cy="33" r="3.4" fill="#2A1A10"/><ellipse cx="32" cy="42" rx="3.4" ry="2.6" fill="#2A1A10"/></svg>Grammar Quest</div>
+    <a href="#gate" class="key">Punya PIN? Masuk</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">🎓 Untuk anak usia 7–12 tahun</span>
+    <h1>Grammar Bahasa Inggris yang akhirnya <span>ditunggu-tunggu</span> anak</h1>
+    <p class="lead">Lima belas unit terstruktur, 165 latihan, dan satu teman belajar yang memanggil nama anak Anda. Semuanya berjalan di ponsel atau tablet, juga saat sinyal sedang hilang.</p>
+    <div class="cta">
+      <a class="btn buy" id="buyTop" href="#">Beli akses lewat WhatsApp</a>
+      <a class="btn line" href="#gate">Saya sudah punya PIN</a>
+    </div>
+    <div class="crew" id="crew"></div>
+    <div class="facts">
+      <div><b>15</b>unit pelajaran</div>
+      <div><b>165</b>soal latihan</div>
+      <div><b>4</b>keterampilan</div>
+      <div><b>100%</b>bisa offline</div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 class="kicker">Anak belajar, bukan sekadar menghafal rumus</h2>
+    <p class="sub narrow">Banyak anak hafal "S + V1 + s/es" tapi bingung saat harus bicara. Grammar Quest membalik urutannya: aturan dijelaskan dengan bahasa Indonesia yang sederhana, lalu langsung dipakai untuk mendengar, menulis, dan mengucapkan kalimat sungguhan.</p>
+    <div class="grid g4">
+      <div class="card skill"><span class="ic">📖</span><h3>Belajar</h3><p>Aturan dipecah jadi potongan kecil, dengan contoh kalimat yang bisa didengar satu per satu.</p></div>
+      <div class="card skill"><span class="ic">🎧</span><h3>Mendengar</h3><p>Kalimat dibacakan dengan pilihan aksen Amerika, Britania, atau Australia. Ada tombol pelan untuk telinga yang masih baru.</p></div>
+      <div class="card skill"><span class="ic">✏️</span><h3>Menulis</h3><p>Isi bagian rumpang dan susun kata acak jadi kalimat utuh. Salah sedikit langsung dikoreksi, bukan ditinggal.</p></div>
+      <div class="card skill"><span class="ic">🎤</span><h3>Berbicara</h3><p>Anak mengucapkan kalimat, aplikasi menilai kemiripannya dalam persen. Tidak ada yang menertawakan, jadi anak berani mencoba.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white);border-top:2px solid var(--line);border-bottom:2px solid var(--line)">
+  <div class="wrap">
+    <h2 class="kicker">Tiga level, naik bertahap</h2>
+    <p class="sub narrow">Urutan materi mengikuti tahapan Cambridge Young Learners dan capaian pembelajaran Bahasa Inggris Kurikulum Merdeka jenjang SD. Unit berikutnya baru terbuka setelah unit sebelumnya tuntas, supaya tidak ada yang terlewat.</p>
+    <div class="grid g3">
+      <div class="card lvl" style="border-top-color:#2FB37A">
+        <div class="age">7–8 tahun · Pre A1 Starters</div><h3>Pulau Matahari</h3>
+        <p>Fondasi kalimat pertama.</p>
+        <ul><li>A, an, dan bentuk jamak</li><li>Kata ganti orang</li><li>To be: am, is, are</li><li>This, that, dan kata sifat</li><li>Have dan has</li></ul>
+      </div>
+      <div class="card lvl" style="border-top-color:#3AA7E0">
+        <div class="age">9–10 tahun · A1 Movers</div><h3>Hutan Kata</h3>
+        <p>Bercerita tentang keseharian.</p>
+        <ul><li>Present simple</li><li>Present continuous</li><li>There is, there are, preposisi</li><li>Can dan kalimat perintah</li><li>Some, any, adverb frekuensi</li></ul>
+      </div>
+      <div class="card lvl" style="border-top-color:#7C5CFF">
+        <div class="age">11–12 tahun · A2 Flyers</div><h3>Gunung Juara</h3>
+        <p>Siap menghadapi ujian sekolah.</p>
+        <ul><li>Past simple</li><li>Past continuous</li><li>Will dan be going to</li><li>Comparative dan superlative</li><li>Present perfect dan modal</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="kicker">Yang membuat anak betah</h2>
+    <div class="grid g3">
+      <div class="card"><h3>🦊 Teman belajar bernama</h3><p>Anak memilih rubah, burung hantu, kucing, atau robot. Teman itu menyapa dengan nama anak di setiap sesi dan ikut memberi semangat saat jawabannya meleset.</p></div>
+      <div class="card"><h3>⭐ Bintang dan lencana</h3><p>Setiap unit memberi maksimal tiga bintang, ditambah dua belas lencana seperti Telinga Tajam dan Raja Grammar. Ada juga hitungan hari belajar beruntun.</p></div>
+      <div class="card"><h3>📊 Halaman progres</h3><p>Orang tua bisa melihat unit mana yang sudah tuntas, berapa kalimat yang sudah diucapkan, dan bagian mana yang masih perlu diulang.</p></div>
+      <div class="card"><h3>📶 Jalan terus tanpa kuota</h3><p>Setelah dipasang, seluruh materi tersimpan di perangkat. Cocok untuk perjalanan, rumah dengan sinyal tipis, atau aturan kuota di rumah.</p></div>
+      <div class="card"><h3>🔕 Tanpa iklan, tanpa gangguan</h3><p>Tidak ada iklan, tidak ada tombol beli di tengah pelajaran, dan tidak ada tautan keluar yang bisa membawa anak ke tempat lain.</p></div>
+      <div class="card"><h3>🔒 Data tinggal di perangkat</h3><p>Nama dan progres anak disimpan di ponsel Anda sendiri. Tidak ada akun yang perlu dibuat dan tidak ada data yang dikirim ke mana pun.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white);border-top:2px solid var(--line)">
+  <div class="wrap">
+    <h2 class="kicker">Tiga langkah, selesai dalam lima menit</h2>
+    <div class="steps" style="margin-top:26px">
+      <div class="step"><h3>Pesan lewat WhatsApp</h3><p>Ketuk tombol hijau di pojok layar. Pesannya sudah tertulis, Anda tinggal mengirim.</p></div>
+      <div class="step"><h3>Terima PIN 6 digit</h3><p>Setelah pembayaran dikonfirmasi, kami kirimkan PIN khusus untuk Anda. Simpan baik-baik, PIN ini berlaku selamanya.</p></div>
+      <div class="step"><h3>Masukkan PIN dan pasang</h3><p>Ketik PIN di kotak bawah, lalu ketuk Pasang. Aplikasi menempel di layar utama seperti aplikasi biasa.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="price-wrap">
+      <div>
+        <h2>Satu kali bayar, dipakai sampai lulus SD</h2>
+        <p>Tanpa langganan bulanan dan tanpa biaya tambahan saat materi diperbarui. Satu PIN bisa dipakai untuk semua perangkat di rumah Anda.</p>
+        <ul class="incl">
+          <li>15 unit lengkap dari Starters sampai Flyers</li>
+          <li>165 soal mendengar, menulis, berbicara, dan kuis</li>
+          <li>Pemasangan di HP, tablet, atau laptop</li>
+          <li>Pembaruan materi berikutnya, gratis</li>
+          <li>Bantuan pemasangan lewat WhatsApp</li>
+        </ul>
+      </div>
+      <div style="text-align:center">
+        <div class="tag" id="priceTag">Rp149.000<small>sekali bayar, akses selamanya</small></div>
+        <a class="btn buy full" id="buyMid" href="#" style="margin-top:22px">Pesan sekarang</a>
+        <p style="font-size:13px;color:#8FB3BF;margin-top:14px">Balasan rata-rata di bawah 1 jam pada jam kerja.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gate">
+  <div class="wrap">
+    <div class="gate" id="gateBox">
+      <div class="pin-box">
+        <h2 class="kicker" style="font-size:26px">Masukkan PIN Anda</h2>
+        <p class="hint">Enam digit yang kami kirim lewat WhatsApp. Cukup sekali saja di perangkat ini.</p>
+        <div class="pins" id="pins">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 1">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 2">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 3">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 4">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 5">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 6">
+        </div>
+        <div class="msg" id="msg"></div>
+        <button class="btn dark full" id="unlock" style="margin-top:10px">Buka akses</button>
+        <p class="hint" style="margin-top:16px">Belum punya PIN? <a href="#" id="buyGate" style="color:var(--coral);font-weight:800">Pesan lewat WhatsApp</a></p>
+      </div>
+      <div class="ok-box" id="okBox">
+        <div style="font-size:52px">🎉</div>
+        <h2 class="kicker" style="font-size:26px;margin-top:6px">Akses terbuka</h2>
+        <p class="hint" id="okName">Selamat belajar! Pasang aplikasinya supaya bisa dibuka kapan saja tanpa internet.</p>
+        <a class="btn go full" id="openApp" href="#" style="margin-top:20px">Buka Grammar Quest</a>
+        <button class="btn dark full" id="install" style="margin-top:10px">Pasang di layar utama</button>
+        <p class="hint" style="margin-top:14px;font-size:13px">Terpasang di perangkat lain? Masukkan PIN yang sama di sana. <button id="forget" style="color:var(--ink-2);text-decoration:underline">Keluar dari perangkat ini</button></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SEKSI TESTIMONI — SEMENTARA DINONAKTIFKAN
+     Alasan: testimoni dan angka di bawah ini contoh, belum data asli.
+     Cara mengaktifkan lagi: hapus style="display:none" pada <section> di bawah,
+     lalu ganti nama, kutipan, dan angka trustbar dengan data sungguhan.
+     ================================================================ -->
+<section style="background:var(--white);border-top:2px solid var(--line);border-bottom:2px solid var(--line);display:none">
+  <div class="wrap">
+    <h2 class="kicker">Kata orang tua yang sudah mencoba</h2>
+    <p class="sub">Ditulis ulang dari pesan WhatsApp pembeli, dengan izin.</p>
+    <div class="tsgrid">
+      <div class="ts"><div class="stars">★★★★★</div>
+        <p>Anak saya kelas 3, biasanya cuma tahan lima menit kalau belajar. Pakai ini bisa sampai habis satu unit sendiri karena penasaran sama bintangnya.</p>
+        <div class="who"><div class="av" style="background:#FF8A4C">RD</div><div><b>Bu Rina, Depok</b><small>Anak usia 8 tahun</small></div></div></div>
+      <div class="ts"><div class="stars">★★★★★</div>
+        <p>Yang saya suka, pas dipakai di mobil pulang kampung tanpa sinyal tetap jalan. Anak saya malah nagih buat lanjut latihan bicaranya.</p>
+        <div class="who"><div class="av" style="background:#3AA7E0">HT</div><div><b>Pak Hendra, Surabaya</b><small>Anak usia 10 tahun</small></div></div></div>
+      <div class="ts"><div class="stars">★★★★★</div>
+        <p>Nilai bahasa Inggris di rapor semester ini naik. Yang paling kerasa di bagian grammar-nya, sebelumnya sering ketuker antara is dan are.</p>
+        <div class="who"><div class="av" style="background:#7C5CFF">SW</div><div><b>Bu Sari, Bandung</b><small>Anak usia 11 tahun</small></div></div></div>
+    </div>
+    <div class="trustbar" style="margin-top:28px">
+      <div><b>500+</b> keluarga sudah memakai</div>
+      <div><b>4.9/5</b> rata-rata ulasan</div>
+      <div><b>&lt; 1 jam</b> respons WhatsApp</div>
+    </div>
+  </div>
+</section>
+<!-- ================================================================ -->
+
+<section class="faq" style="padding-top:56px">
+  <div class="wrap narrow">
+    <h2 class="kicker">Pertanyaan yang sering masuk</h2>
+    <div style="margin-top:22px">
+      <details><summary>Perlu unduh dari Play Store atau App Store?</summary><p>Tidak. Grammar Quest berjalan langsung di peramban dan bisa dipasang ke layar utama lewat menu Instal aplikasi di Chrome, atau Tambah ke Layar Utama di Safari. Kami bantu prosesnya lewat WhatsApp kalau perlu.</p></details>
+      <details><summary>Anak saya baru kelas 1, apakah cocok?</summary><p>Level pertama dirancang untuk anak 7–8 tahun yang sudah lancar membaca. Kalau anak masih mengeja, sebaiknya ditemani orang tua pada beberapa sesi pertama. Semua penjelasan aturan memakai Bahasa Indonesia.</p></details>
+      <details><summary>Satu PIN untuk berapa perangkat?</summary><p>Satu PIN bisa dipakai di semua perangkat milik keluarga Anda, misalnya tablet anak dan ponsel orang tua. Progres tiap perangkat berdiri sendiri, jadi dua anak bisa punya profil masing-masing.</p></details>
+      <details><summary>Fitur berbicara butuh internet?</summary><p>Pembacaan kalimat memakai pembaca teks bawaan perangkat dan berfungsi offline di sebagian besar Android, Windows, dan iOS. Penilaian pengucapan memakai pengenal suara peramban, yang pada sebagian perangkat masih memerlukan koneksi. Kalau tidak tersedia, aplikasi otomatis beralih ke mode latihan mandiri.</p></details>
+      <details><summary>Ada tambahan materi nanti?</summary><p>Ada. Pembaruan dikirim ke pembeli lama tanpa biaya tambahan, memakai PIN yang sama.</p></details>
+      <details><summary>Bagaimana kalau PIN saya hilang?</summary><p>Hubungi kami lewat WhatsApp dengan nomor yang dipakai saat memesan, dan kami kirim ulang.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="confirm">
+  <div class="wrap">
+    <div class="confirm-wrap">
+      <h2 class="kicker" style="font-size:26px;text-align:center">Sudah transfer? Konfirmasi di sini</h2>
+      <p class="hint" style="text-align:center;margin-top:6px">Isi sedikit data di bawah, lalu pesannya otomatis tersusun rapi untuk dikirim ke WhatsApp kami. PIN biasanya dibalas dalam hitungan menit pada jam kerja.</p>
+      <ul class="steps2">
+        <li><span class="n">1</span><div><b>Transfer sesuai nominal</b><br>Sesuai jumlah yang disepakati saat pemesanan lewat WhatsApp.</div></li>
+        <li><span class="n">2</span><div><b>Isi formulir ini</b><br>Nama, metode pembayaran, dan waktu transfer.</div></li>
+        <li><span class="n">3</span><div><b>Kirim ke WhatsApp</b><br>Lampirkan foto atau screenshot bukti transfer di chat.</div></li>
+      </ul>
+      <form id="confirmForm">
+        <div class="field"><label for="cfName">Nama pemesan</label><input id="cfName" required placeholder="Nama Anda"></div>
+        <div class="field"><label for="cfMethod">Metode pembayaran</label>
+          <select id="cfMethod"><option>Transfer Bank</option><option>QRIS</option><option>E-Wallet (OVO/DANA/GoPay)</option><option>Lainnya</option></select></div>
+        <div class="field"><label for="cfWhen">Waktu transfer</label><input id="cfWhen" type="datetime-local"></div>
+        <div class="field"><label for="cfNote">Catatan (opsional)</label><textarea id="cfNote" placeholder="Misalnya: transfer dari rekening atas nama lain"></textarea></div>
+        <button class="btn go full" id="cfSend" type="submit">Kirim konfirmasi ke WhatsApp</button>
+      </form>
+      <p class="note2">Setelah menekan tombol, WhatsApp akan terbuka dengan pesan yang sudah terisi. Jangan lupa lampirkan bukti transfer sebelum mengirim.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:18px">Grammar Quest</div>
+    <p style="max-width:56ch;font-size:14px;line-height:1.7">Aplikasi latihan grammar Bahasa Inggris untuk anak 7–12 tahun. Dibuat untuk dipakai berulang, di rumah maupun di kelas.</p>
+    <p style="margin-top:18px;font-size:13px">
+      <a href="#gate">Masuk dengan PIN</a> &nbsp;·&nbsp;
+      <a href="#" id="buyFoot">Pesan lewat WhatsApp</a> &nbsp;·&nbsp;
+      <a href="#confirm">Konfirmasi pembayaran</a>
+    </p>
+    <p style="margin-top:20px;font-size:12.5px;color:#6D8E9B;border-top:1px solid rgba(255,255,255,.1);padding-top:16px">
+      © <span id="cyear"></span> Pawon <a id="sellerBtn" href="./admin.html">Digital</a>. Seluruh hak cipta dilindungi.
+    </p>
+  </div>
+</footer>
+
+<a class="wa" id="waFab" href="#" target="_blank" rel="noopener" aria-label="Pesan lewat WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#063d1c" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.7c1.9 1 4 1.6 6.2 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm7.6 18.4c-.3.9-1.8 1.7-2.5 1.8-.6.1-1.4.1-2.3-.2-.5-.2-1.2-.4-2.1-.8-3.7-1.6-6.1-5.3-6.3-5.6-.2-.3-1.5-2-1.5-3.8s.9-2.7 1.3-3.1c.3-.3.7-.4 1-.4h.7c.2 0 .5 0 .8.6l1.1 2.6c.1.2.2.5 0 .8l-.4.6-.5.6c-.2.2-.4.4-.2.7.2.3.9 1.5 1.9 2.4 1.3 1.2 2.4 1.5 2.7 1.7.3.2.5.1.7-.1l1-1.2c.2-.3.5-.2.8-.1l2.5 1.2c.3.2.6.3.7.4.1.3.1.9-.2 1.8z"/></svg>
+  <span class="lbl">Pesan aplikasi</span>
+</a>
+
+<div class="toast" id="toast"></div>
+<script>
+/* =====================================================================
+   PENGATURAN — ubah bagian ini saja
+   ===================================================================== */
+const CONFIG = {
+  waNumber : '6281277443352',                 // nomor WhatsApp penjual, format internasional tanpa + atau spasi
+  waText   : 'Halo, saya mau memesan akses aplikasi Grammar Quest untuk anak saya. Mohon info cara pembayarannya ya.',
+  price    : 'Rp89.000',                     // tampil di halaman harga
+  appUrl   : './app.html'                     // lokasi aplikasinya
+};
+/* Catatan: kunci pembuat PIN dan daftar PIN kini disimpan di server (Cloudflare
+   D1), bukan di sini. Lihat functions/api/redeem.js, functions/api/admin/generate.js,
+   dan admin.html untuk mengelola PIN. */
+/* ===================================================================== */
+
+const $ = s => document.querySelector(s);
+const waLink = () => 'https://wa.me/' + CONFIG.waNumber + '?text=' + encodeURIComponent(CONFIG.waText);
+['#waFab','#buyTop','#buyMid','#buyGate','#buyFoot'].forEach(id=>{
+  const el=$(id); if(el){ el.href=waLink(); el.target='_blank'; el.rel='noopener'; }
+});
+$('#priceTag').firstChild.textContent = CONFIG.price;
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('on'),2600); }
+
+/* ---------- Maskot di hero ---------- */
+const FACES = {
+ fox:`<path d="M14 24 L12 8 L26 16 Z" fill="#FF8A4C"/><path d="M50 24 L52 8 L38 16 Z" fill="#FF8A4C"/><ellipse cx="32" cy="36" rx="22" ry="20" fill="#FF8A4C"/><ellipse cx="32" cy="42" rx="14" ry="13" fill="#FFD9BF"/><circle cx="24" cy="33" r="3.4" fill="#2A1A10"/><circle cx="40" cy="33" r="3.4" fill="#2A1A10"/><circle cx="25.2" cy="31.8" r="1.2" fill="#fff"/><circle cx="41.2" cy="31.8" r="1.2" fill="#fff"/><ellipse cx="32" cy="42" rx="3.4" ry="2.6" fill="#2A1A10"/>`,
+ owl:`<ellipse cx="32" cy="36" rx="22" ry="21" fill="#8B6BD8"/><path d="M12 22 L20 10 L26 20 Z" fill="#8B6BD8"/><path d="M52 22 L44 10 L38 20 Z" fill="#8B6BD8"/><circle cx="24" cy="33" r="9" fill="#E4DBFF"/><circle cx="40" cy="33" r="9" fill="#E4DBFF"/><circle cx="24" cy="33" r="4" fill="#2A1A10"/><circle cx="40" cy="33" r="4" fill="#2A1A10"/><circle cx="25.4" cy="31.6" r="1.4" fill="#fff"/><circle cx="41.4" cy="31.6" r="1.4" fill="#fff"/><path d="M32 40 l-5 5 h10 z" fill="#FFB020"/>`,
+ cat:`<path d="M14 22 L13 8 L25 15 Z" fill="#FFC24B"/><path d="M50 22 L51 8 L39 15 Z" fill="#FFC24B"/><ellipse cx="32" cy="36" rx="22" ry="20" fill="#FFC24B"/><circle cx="24" cy="33" r="3.6" fill="#2A1A10"/><circle cx="40" cy="33" r="3.6" fill="#2A1A10"/><circle cx="25.2" cy="31.8" r="1.2" fill="#fff"/><circle cx="41.2" cy="31.8" r="1.2" fill="#fff"/><path d="M29 41 l3 3 l3 -3 z" fill="#FF6B5A"/><path d="M8 38 h12 M8 43 h12 M56 38 h-12 M56 43 h-12" stroke="#FFF0CC" stroke-width="2" stroke-linecap="round"/>`,
+ bot:`<rect x="12" y="20" width="40" height="34" rx="12" fill="#3AA7E0"/><rect x="28" y="8" width="8" height="10" rx="4" fill="#D4EEFF"/><circle cx="32" cy="7" r="4" fill="#FF6B5A"/><rect x="19" y="29" width="26" height="14" rx="7" fill="#12313F"/><circle cx="26" cy="36" r="3.4" fill="#7CF0C8"/><circle cx="38" cy="36" r="3.4" fill="#7CF0C8"/><rect x="26" y="47" width="12" height="3" rx="1.5" fill="#D4EEFF"/><rect x="4" y="30" width="7" height="12" rx="3.5" fill="#D4EEFF"/><rect x="53" y="30" width="7" height="12" rx="3.5" fill="#D4EEFF"/>`
+};
+$('#crew').innerHTML = ['owl','fox','cat','bot'].map(k=>`<svg viewBox="0 0 64 64" aria-hidden="true">${FACES[k]}</svg>`).join('');
+
+/* ---------- PIN ---------- */
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+const ACCESS='gq.access';
+
+const inputs = [...document.querySelectorAll('#pins input')];
+inputs.forEach((el,i)=>{
+  el.addEventListener('input',()=>{
+    el.value = el.value.replace(/\D/g,'').slice(0,1);
+    if (el.value && i < 5) inputs[i+1].focus();
+    if (inputs.every(x=>x.value)) setTimeout(submit, 120);
+  });
+  el.addEventListener('keydown',e=>{
+    if (e.key==='Backspace' && !el.value && i>0){ inputs[i-1].focus(); inputs[i-1].value=''; e.preventDefault(); }
+    if (e.key==='Enter') submit();
+  });
+  el.addEventListener('paste',e=>{
+    const d=(e.clipboardData.getData('text')||'').replace(/\D/g,'').slice(0,6);
+    if(d.length){ e.preventDefault(); inputs.forEach((x,k)=>x.value=d[k]||''); inputs[Math.min(d.length,5)].focus(); if(d.length===6) setTimeout(submit,120); }
+  });
+});
+
+let submitting = false;
+async function submit(){
+  if (submitting) return;
+  const box=$('#gateBox'), msg=$('#msg'), btn=$('#unlock');
+  const pin = inputs.map(x=>x.value).join('');
+  if (pin.length < 6){ msg.className='msg bad'; msg.textContent='PIN terdiri dari 6 angka.'; return; }
+
+  submitting = true; btn.setAttribute('disabled','');
+  msg.className='msg'; msg.textContent='Memeriksa…';
+
+  let data;
+  try {
+    const res = await fetch('/api/redeem', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pin })
+    });
+    data = await res.json();
+  } catch (e) {
+    submitting = false; btn.removeAttribute('disabled');
+    msg.className='msg bad';
+    msg.textContent = 'Tidak bisa terhubung ke server. Periksa koneksi internet Anda, lalu coba lagi.';
+    return;
+  }
+  submitting = false; btn.removeAttribute('disabled');
+
+  if (data.ok){
+    store.set(ACCESS,{pin, at:Date.now()});
+    msg.className='msg good'; msg.textContent='PIN benar.';
+    setTimeout(showUnlocked, 400);
+  } else {
+    box.classList.add('err'); setTimeout(()=>box.classList.remove('err'),420);
+    msg.className='msg bad';
+    if (data.error==='locked'){
+      msg.textContent = `Terlalu banyak percobaan. Coba lagi dalam ${data.minutes} menit, atau hubungi kami lewat WhatsApp.`;
+    } else if (data.error==='invalid'){
+      msg.textContent = `PIN tidak dikenali. Sisa ${data.left} percobaan.`;
+    } else {
+      msg.textContent = 'PIN belum bisa diperiksa saat ini. Coba lagi sebentar lagi.';
+    }
+    inputs.forEach(x=>x.value=''); inputs[0].focus();
+  }
+}
+$('#unlock').addEventListener('click', submit);
+
+function showUnlocked(){
+  $('#gateBox').classList.add('done');
+  $('#okBox').classList.add('on');
+  $('#openApp').href = CONFIG.appUrl;
+  const a = store.get(ACCESS,{});
+  if (a.pin) $('#okName').textContent = `Akses aktif di perangkat ini dengan PIN ${a.pin.slice(0,2)}••••. Pasang aplikasinya supaya bisa dibuka kapan saja tanpa internet.`;
+}
+if (store.get(ACCESS)) showUnlocked();
+
+$('#forget').addEventListener('click',()=>{
+  if (!confirm('Keluar dari perangkat ini? Anda perlu memasukkan PIN lagi. Progres belajar anak tidak terhapus.')) return;
+  store.del(ACCESS);
+  $('#gateBox').classList.remove('done'); $('#okBox').classList.remove('on');
+  $('#msg').textContent=''; inputs.forEach(x=>x.value=''); inputs[0].focus();
+});
+
+/* ---------- Pasang aplikasi ---------- */
+let deferred = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; });
+$('#install').addEventListener('click', ()=>{
+  if (deferred){ deferred.prompt(); deferred.userChoice.then(()=>{ deferred=null; }); return; }
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  toast(ios ? 'Di Safari: tombol Bagikan → Tambah ke Layar Utama'
+            : 'Menu peramban → Instal aplikasi / Tambah ke layar utama');
+});
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+
+$('#cyear').textContent = new Date().getFullYear();
+
+/* ---------- Form konfirmasi pembayaran ---------- */
+$('#confirmForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = $('#cfName').value.trim();
+  const method = $('#cfMethod').value;
+  const whenRaw = $('#cfWhen').value;
+  const note = $('#cfNote').value.trim();
+  if (!name){ toast('Isi nama pemesan dulu ya.'); $('#cfName').focus(); return; }
+  const when = whenRaw ? new Date(whenRaw).toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'}) : '(belum diisi)';
+  let msg = `Halo, saya mau konfirmasi pembayaran Grammar Quest.\n\n`
+          + `Nama: ${name}\nMetode: ${method}\nWaktu transfer: ${when}`;
+  if (note) msg += `\nCatatan: ${note}`;
+  msg += `\n\nBukti transfer akan saya lampirkan di chat ini.`;
+  window.open('https://wa.me/' + CONFIG.waNumber + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+});
+
+/* Area Penjual kini halaman terpisah: admin.html — lihat berkas itu.
+   Tombol "Digital" di footer sudah berupa tautan langsung ke admin.html,
+   tidak perlu penanganan klik di sini. */
+
+</script>
+</body>
+</html>

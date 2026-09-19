@@ -1,0 +1,37 @@
+{
+  "name": "Grammar Quest — Belajar Grammar Bahasa Inggris",
+  "short_name": "Grammar Quest",
+  "description": "Aplikasi belajar grammar Bahasa Inggris untuk anak 7–12 tahun: menulis, mendengar, dan berbicara.",
+  "lang": "id",
+  "dir": "ltr",
+  "start_url": "./app.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E6F1EF",
+  "theme_color": "#12313F",
+  "categories": [
+    "education",
+    "kids"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

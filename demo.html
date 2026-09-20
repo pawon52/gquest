@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coba Gratis — Grammar Quest</title>
+<meta name="description" content="Coba langsung satu unit penuh dari Grammar Quest, gratis dan tanpa perlu PIN. Rasakan cara belajar menulis, mendengar, dan berbicara Bahasa Inggris untuk anak 7–12 tahun.">
+<meta name="theme-color" content="#12313F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E6F1EF; --paper-2:#D6E8E6; --surface:#FFFFFF; --surface-2:#F4FAF9;
+  --ink:#12313F; --ink-2:#4A6B78; --line:#C9DEDB;
+  --mango:#FFB020; --coral:#FF6B5A; --leaf:#2FB37A; --sky:#3AA7E0; --grape:#7C5CFF;
+  --r-lg:26px; --r-md:18px; --r-sm:12px;
+  --display:'Fredoka',ui-rounded,'Segoe UI',system-ui,sans-serif;
+  --body:'Nunito',ui-rounded,'Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);min-height:100dvh;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;color:inherit;border:none;background:none;cursor:pointer}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0}
+:focus-visible{outline:3px solid var(--grape);outline-offset:3px;border-radius:6px}
+
+.top{background:linear-gradient(180deg,#0E2430,#13303E);color:#fff;padding:18px 16px}
+.top .row{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.top .brand{font-family:var(--display);font-weight:700;font-size:18px;flex:1}
+.top a.exit{color:#CFE4EA;font-size:13.5px;text-decoration:none;font-weight:700}
+.banner{max-width:640px;margin:0 auto;padding:16px 16px 0}
+.banner .tag{display:inline-flex;gap:6px;align-items:center;background:#FFF3D6;color:#8A6100;font-family:var(--display);
+  font-size:13px;padding:6px 13px;border-radius:999px;margin-bottom:10px}
+
+.wrap{max-width:640px;margin:0 auto;padding:14px 16px 100px}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:0 10px 30px rgba(18,49,63,.10);margin-bottom:14px}
+.card h3{font-size:19px;margin-bottom:6px}
+.rule{border-left:6px solid var(--grape);padding:2px 0 2px 13px;margin:14px 0}
+.rule b{font-family:var(--display);font-size:16px}
+.rule p{margin:4px 0 0;font-size:15px;line-height:1.5;color:var(--ink-2)}
+.exline{display:flex;align-items:center;gap:10px;background:var(--surface-2);border-radius:var(--r-sm);
+  padding:10px 12px;margin:8px 0;border:1px solid var(--line)}
+.exline .en{font-family:var(--display);font-size:16px;flex:1}
+.exline .idn{display:block;font-family:var(--body);font-size:13px;color:var(--ink-2);font-weight:600}
+.spk{width:38px;height:38px;flex:none;border-radius:50%;background:var(--sky);color:#fff;display:grid;place-items:center;
+  box-shadow:0 4px 0 #2A82B0;font-size:17px}
+.spk:active{transform:translateY(3px);box-shadow:0 1px 0 #2A82B0}
+.spk.big{width:84px;height:84px;font-size:34px;box-shadow:0 7px 0 #2A82B0}
+.spk.rec{background:var(--coral);box-shadow:0 7px 0 #D14A3B}
+.spk.rec.live{animation:pulse 1.1s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--display);font-size:17px;
+  font-weight:600;padding:14px 22px;border-radius:999px;background:var(--surface);box-shadow:0 6px 0 rgba(18,49,63,.14);
+  border:2px solid var(--line);transition:transform .12s,box-shadow .12s}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(18,49,63,.14)}
+.btn.primary{background:var(--mango);border-color:#E09400;color:#3A2600;box-shadow:0 6px 0 #C97F00}
+.btn.primary:active{box-shadow:0 2px 0 #C97F00}
+.btn.go{background:var(--leaf);border-color:#1E8F5E;color:#fff;box-shadow:0 6px 0 #1B7A51}
+.btn.go:active{box-shadow:0 2px 0 #1B7A51}
+.btn.wide{width:100%}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:2px 0 14px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;font-family:var(--display);font-size:14px;padding:9px 14px;border-radius:999px;
+  background:var(--surface);border:2px solid var(--line)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pbar{height:12px;border-radius:999px;background:var(--paper-2);overflow:hidden;border:2px solid var(--line);margin-bottom:14px}
+.pbar i{display:block;height:100%;background:var(--leaf);width:0;transition:width .35s}
+
+.qnum{font-family:var(--display);font-size:13px;color:var(--ink-2)}
+.qtext{font-family:var(--display);font-size:21px;line-height:1.45;margin:8px 0 16px}
+.blank{display:inline-block;min-width:70px;border-bottom:4px dotted var(--coral);text-align:center}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;font-family:var(--display);font-size:17px;padding:14px 16px;border-radius:var(--r-md);
+  background:var(--surface-2);border:2px solid var(--line);box-shadow:0 6px 0 rgba(18,49,63,.14);transition:transform .1s}
+.opt:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(18,49,63,.14)}
+.opt.right{background:#D9F5E7;border-color:var(--leaf);color:#0C5138}
+.opt.wrong{background:#FFE2DE;border-color:var(--coral);color:#7A2318}
+.opt.dim{opacity:.5}
+
+.answerbox{width:100%;font-family:var(--display);font-size:20px;padding:14px;border-radius:var(--r-md);
+  border:3px solid var(--line);background:var(--surface-2);color:var(--ink);text-align:center}
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;justify-content:center}
+.chip{font-family:var(--display);font-size:16px;padding:10px 15px;border-radius:14px;background:var(--surface-2);
+  border:2px solid var(--line);box-shadow:0 6px 0 rgba(18,49,63,.14)}
+.chip:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(18,49,63,.14)}
+.chip.used{opacity:.3;pointer-events:none}
+.slot{min-height:62px;border:3px dashed var(--line);border-radius:var(--r-md);padding:10px;display:flex;
+  flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface-2)}
+.slot:empty::after{content:"Susun kalimatnya di sini";color:var(--ink-2);font-size:14px;opacity:.8}
+
+.feedback{border-radius:var(--r-md);padding:13px 15px;margin-top:14px;font-size:15px;line-height:1.5;display:none}
+.feedback.on{display:block}
+.feedback.good{background:#D9F5E7;color:#0C5138}
+.feedback.bad{background:#FFE2DE;color:#7A2318}
+.feedback b{font-family:var(--display);display:block;font-size:17px;margin-bottom:2px}
+
+.scorebar{display:flex;gap:8px;align-items:center;justify-content:center;margin:10px 0 2px;flex-wrap:wrap}
+.meter{height:16px;border-radius:999px;background:var(--paper-2);flex:1;min-width:140px;overflow:hidden;border:2px solid var(--line)}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),var(--mango),var(--leaf));width:0;transition:width .5s}
+
+.done-wrap{text-align:center;padding:26px 6px}
+.done-wrap .big{font-size:60px;line-height:1}
+.cta-box{background:linear-gradient(180deg,#0E2430,#13303E);color:#fff;border-radius:26px;padding:26px 22px;text-align:center;margin-top:18px}
+.cta-box h2{font-size:22px;margin-bottom:8px}
+.cta-box p{color:#C6DCE4;font-size:14.5px;margin:0 0 18px;line-height:1.6}
+.wa{background:#25D366;color:#063d1c}
+.note{font-size:13px;color:var(--ink-2);line-height:1.5;text-align:center;padding:4px 10px}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="row">
+  <div class="brand">🦊 Grammar Quest</div>
+  <a class="exit" href="./index.html">Kembali ke beranda ✕</a>
+</div></div>
+
+<div class="banner">
+  <span class="tag">🎁 Mode coba gratis — 1 unit penuh, tanpa PIN</span>
+</div>
+
+<div class="wrap">
+  <h2 style="font-size:22px">🍎 A, An &amp; Plural</h2>
+  <p style="color:var(--ink-2);margin:2px 0 12px;font-size:14px">Kata benda tunggal dan jamak — ini persis unit pertama yang akan dilihat anak Anda setelah membeli akses penuh.</p>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="pbar"><i id="pbar"></i></div>
+  <div id="body"></div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+
+/* Data ini disalin persis dari unit pertama versi lengkap, supaya calon
+   pembeli tahu betul kualitas dan gaya materi yang akan mereka dapatkan. */
+const UNIT = {
+  id:'u1', icon:'🍎', title:'A, An & Plural', titleId:'Kata benda tunggal dan jamak',
+  goal:'Memakai a / an dan menambah -s untuk benda lebih dari satu.',
+  rules:[
+   {b:'a atau an?', p:'Pakai <b>a</b> sebelum bunyi konsonan: a book, a dog. Pakai <b>an</b> sebelum bunyi vokal a, i, u, e, o: an apple, an egg, an umbrella.'},
+   {b:'Lebih dari satu → tambah -s', p:'one book → two book<b>s</b>. one cat → three cat<b>s</b>.'},
+   {b:'Kalau berakhiran -s, -x, -ch, -sh → tambah -es', p:'one bus → two bus<b>es</b>, one box → six box<b>es</b>, one watch → two watch<b>es</b>.'},
+   {b:'Jamak tak beraturan', p:'man → men, woman → women, child → children, foot → feet, mouse → mice, tooth → teeth.'}
+  ],
+  ex:[{en:'I have a red ball.',id:'Saya punya sebuah bola merah.'},
+      {en:'She eats an orange every day.',id:'Dia makan sebuah jeruk setiap hari.'},
+      {en:'There are five books on the table.',id:'Ada lima buku di atas meja.'},
+      {en:'Two children are playing outside.',id:'Dua anak sedang bermain di luar.'}],
+  listen:[
+   {say:'I have an umbrella.', q:'Kalimat mana yang kamu dengar?', o:['I have a umbrella.','I have an umbrella.','I have umbrellas.'], a:1},
+   {say:'There are three boxes.', q:'Berapa banyak kotaknya?', o:['Satu kotak','Dua kotak','Tiga kotak'], a:2},
+   {say:'My friend has two watches.', q:'Kata benda jamak yang kamu dengar adalah…', o:['watch','watches','watched'], a:1}
+  ],
+  write:[
+   {t:'fill', s:'I see ___ elephant at the zoo.', a:['an'], bank:['a','an'], id:'Saya melihat seekor gajah di kebun binatang.'},
+   {t:'fill', s:'There are six ___ in the garden. (flower)', a:['flowers'], id:'Ada enam bunga di taman.'},
+   {t:'fill', s:'My mother buys three ___ . (dress)', a:['dresses'], id:'Ibu saya membeli tiga gaun.'},
+   {t:'order', w:['a','is','This','banana','yellow'], a:'This is a yellow banana.', id:'Ini adalah pisang kuning.'}
+  ],
+  speak:[{en:'I have an apple and two bananas.',id:'Saya punya sebuah apel dan dua pisang.'},
+         {en:'There are many children in the park.',id:'Ada banyak anak di taman.'},
+         {en:'She has a new pencil box.',id:'Dia punya sebuah kotak pensil baru.'}],
+  quiz:[
+   {q:'Mira has ___ orange bag.', o:['a','an','the'], a:1, why:'Bunyi awal "orange" adalah vokal /o/, jadi pakai an.'},
+   {q:'Jamak dari "child" adalah…', o:['childs','childes','children'], a:2, why:'child adalah jamak tak beraturan → children.'},
+   {q:'I brush my ___ every morning.', o:['tooths','teeth','tooth'], a:1, why:'Kita punya banyak gigi, jamak dari tooth adalah teeth.'},
+   {q:'Mana yang benar?', o:['two bus','two buss','two buses'], a:2, why:'Kata berakhiran -s ditambah -es → buses.'}
+  ]
+};
+
+const WA_NUMBER = '6281277443352'; // samakan dengan CONFIG.waNumber di index.html
+const WA_TEXT = 'Halo, saya sudah coba demo Grammar Quest dan tertarik membeli akses penuh untuk anak saya.';
+const waLink = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT);
+
+/* ---------- Audio (sama seperti versi lengkap) ---------- */
+let AC=null;
+function beep(type){
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==='suspended') AC.resume();
+    const seq = type==='good'? [[660,0],[880,.09],[1180,.18]] : type==='bad'? [[300,0],[220,.12]] : [[520,0],[780,.08],[1040,.16],[1320,.26]];
+    seq.forEach(([f,t])=>{
+      const o=AC.createOscillator(), g=AC.createGain();
+      o.type= type==='bad'?'sawtooth':'triangle'; o.frequency.value=f;
+      o.connect(g); g.connect(AC.destination);
+      const s=AC.currentTime+t;
+      g.gain.setValueAtTime(0.0001,s); g.gain.exponentialRampToValueAtTime(.18,s+.02);
+      g.gain.exponentialRampToValueAtTime(.0001,s+.22);
+      o.start(s); o.stop(s+.24);
+    });
+  }catch(e){}
+}
+let VOICES=[];
+function loadVoices(){ try{VOICES=speechSynthesis.getVoices()||[];}catch(e){} }
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+function pickVoice(){ if(!VOICES.length) loadVoices(); return VOICES.find(v=>v.lang&&v.lang.toLowerCase().startsWith('en'))||null; }
+function say(text, opts){
+  if(!('speechSynthesis' in window)) return;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    const v=pickVoice(); if(v) u.voice=v;
+    u.lang='en-US'; u.rate=(opts&&opts.slow)?0.6:0.86; u.pitch=1.07;
+    if(opts&&opts.onend) u.onend=opts.onend;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+const norm = s => (s||'').toLowerCase().replace(/[.,!?;:"“”'’]/g,' ').replace(/\s+/g,' ').trim();
+const tight = s => (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();
+const same = (a,b) => norm(a)===norm(b) || tight(a)===tight(b);
+document.addEventListener('click',()=>{ try{ if(AC&&AC.state==='suspended')AC.resume(); }catch(e){} },{once:true});
+
+/* ---------- Navigasi tab ---------- */
+const TABS=[['learn','📖','Belajar'],['listen','🎧','Dengar'],['write','✏️','Tulis'],['speak','🎤','Bicara'],['quiz','🏅','Kuis']];
+let tab='learn', ex={i:0,right:0,answered:false};
+const body=()=>document.getElementById('body');
+const doneMap = {learn:false,listen:false,write:false,speak:false,quiz:false};
+
+function renderTabs(){
+  $('#tabs').innerHTML = TABS.map(([k,i,l])=>
+    `<button class="tab" role="tab" aria-selected="${tab===k}" data-tab="${k}">${i} ${l}${doneMap[k]?' ✓':''}</button>`).join('');
+  $('#tabs').querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{
+    if(b.dataset.tab!=='learn' && !doneMap.learn){ return; }
+    tab=b.dataset.tab; ex={i:0,right:0,answered:false}; render();
+  });
+  const done = Object.values(doneMap).filter(Boolean).length;
+  $('#pbar').style.width = Math.round(done/5*100)+'%';
+}
+function render(){
+  renderTabs();
+  ({learn:vLearn,listen:vListen,write:vWrite,speak:vSpeak,quiz:vQuiz})[tab]();
+}
+
+function nextOrFinish(sec,total,label){
+  if(ex.i+1<total){ ex.i++; ex.answered=false; ({listen:vListen,write:vWrite,speak:vSpeak,quiz:vQuiz})[sec](); }
+  else finishSection(sec,total,label);
+}
+function finishSection(sec,total,label){
+  doneMap[sec]=true; renderTabs();
+  const pct=Math.round(ex.right/total*100);
+  beep('win');
+  const nextTabIdx=TABS.findIndex(t=>t[0]===sec)+1;
+  const nextTab=TABS[nextTabIdx];
+  body().innerHTML=`<div class="card done-wrap">
+    <div class="big">${pct>=90?'🎉':pct>=70?'👏':'💪'}</div>
+    <h2 style="margin-top:8px">${label} selesai!</h2>
+    <p style="color:var(--ink-2);margin:6px 0 0">Kamu benar ${ex.right} dari ${total} soal.</p>
+    <div class="scorebar" style="margin-top:14px"><div class="meter"><i style="width:${pct}%"></i></div><b style="font-family:var(--display)">${pct}%</b></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px">
+      <button class="btn" id="again">Ulangi</button>
+      ${nextTab?`<button class="btn primary" id="nxt">Lanjut ${nextTab[2]}</button>`:''}
+    </div>
+  </div>`;
+  document.getElementById('again').onclick=()=>{ ex={i:0,right:0,answered:false}; render(); };
+  const b1=document.getElementById('nxt'); if(b1) b1.onclick=()=>{ tab=nextTab[0]; ex={i:0,right:0,answered:false}; render(); };
+  if (!nextTab) showFinalCTA();
+}
+
+function showFinalCTA(){
+  body().insertAdjacentHTML('beforeend', `
+    <div class="cta-box">
+      <h2>🎉 Itu baru satu unit dari 15!</h2>
+      <p>Unit ini bagian dari Level Pulau Matahari (Pre A1). Masih ada Hutan Kata dan Gunung Juara menanti, lengkap dengan lencana, bintang, dan teman belajar pilihan anak Anda.</p>
+      <a class="btn wa wide" href="${waLink}" target="_blank" rel="noopener">Pesan akses penuh lewat WhatsApp</a>
+      <a href="./index.html" style="display:block;margin-top:12px;color:#CFE4EA;font-size:13.5px">Lihat semua level & harga →</a>
+    </div>`);
+}
+
+/* ---------- 1. Belajar ---------- */
+function vLearn(){
+  body().innerHTML=`
+   <div class="card">
+     <h3>Aturannya</h3>
+     ${UNIT.rules.map(r=>`<div class="rule"><b>${r.b}</b><p>${r.p}</p></div>`).join('')}
+   </div>
+   <div class="card">
+     <h3>Contoh kalimat</h3>
+     <p style="color:var(--ink-2);font-size:13.5px;margin:0 0 6px">Ketuk tombol biru untuk mendengar pengucapannya.</p>
+     ${UNIT.ex.map((e,i)=>`<div class="exline">
+        <div class="en">${e.en}<span class="idn">${e.id}</span></div>
+        <button class="spk" data-say="${i}" aria-label="Dengarkan">🔊</button></div>`).join('')}
+     <button class="btn" id="sayAll" style="margin-top:10px">▶ Dengarkan semua</button>
+   </div>
+   <button class="btn go wide" id="doneLearn">Saya sudah paham, lanjut latihan</button>`;
+  body().querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>say(UNIT.ex[+b.dataset.say].en));
+  document.getElementById('sayAll').onclick=()=>{
+    let k=0; const run=()=>{ if(k<UNIT.ex.length) say(UNIT.ex[k++].en,{onend:run}); }; run();
+  };
+  document.getElementById('doneLearn').onclick=()=>{
+    doneMap.learn=true; beep('good'); tab='listen'; ex={i:0,right:0,answered:false}; render();
+  };
+}
+
+/* ---------- 2. Dengar ---------- */
+function vListen(){
+  const q=UNIT.listen[ex.i];
+  body().innerHTML=`<div class="card" style="text-align:center">
+     <div class="qnum">Soal ${ex.i+1} dari ${UNIT.listen.length}</div>
+     <p style="color:var(--ink-2);font-size:14px;margin:8px 0 12px">Ketuk tombol untuk mendengar kalimatnya. Boleh diulang!</p>
+     <button class="spk big" id="play" aria-label="Putar audio">🔊</button>
+     <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
+       <button class="btn" id="slow" style="font-size:14px;padding:10px 16px">🐢 Pelan</button>
+     </div>
+   </div>
+   <div class="card">
+     <div class="qtext" style="font-size:18px">${q.q}</div>
+     <div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>
+     <div class="feedback" id="fb"></div>
+     <button class="btn primary wide" id="next" style="margin-top:14px;display:none">Lanjut</button>
+   </div>`;
+  const play=()=>say(q.say);
+  setTimeout(play,350);
+  document.getElementById('play').onclick=play;
+  document.getElementById('slow').onclick=()=>say(q.say,{slow:true});
+  body().querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    if(ex.answered) return; ex.answered=true;
+    const ok=+b.dataset.i===q.a;
+    body().querySelectorAll('.opt').forEach((x,i)=>{ if(i===q.a)x.classList.add('right'); else if(x===b)x.classList.add('wrong'); else x.classList.add('dim'); });
+    const fb=document.getElementById('fb');
+    fb.className='feedback on '+(ok?'good':'bad');
+    fb.innerHTML=`<b>${ok?'Tepat sekali!':'Belum tepat.'}</b>Kalimatnya: “${q.say}”`;
+    if(ok){ ex.right++; beep('good'); } else beep('bad');
+    document.getElementById('next').style.display='block';
+  });
+  document.getElementById('next').onclick=()=>nextOrFinish('listen',UNIT.listen.length,'Latihan mendengar');
+}
+
+/* ---------- 3. Tulis ---------- */
+function vWrite(){
+  const q=UNIT.write[ex.i];
+  const head=`<div class="qnum">Soal ${ex.i+1} dari ${UNIT.write.length}</div>`;
+  if(q.t==='fill'){
+    const [a,b]=q.s.split('___');
+    body().innerHTML=`<div class="card">
+      ${head}
+      <div class="qtext">${a}<span class="blank">?</span>${b||''}</div>
+      <p style="color:var(--ink-2);font-size:14px;margin:-8px 0 12px">Artinya: ${q.id}</p>
+      <input class="answerbox" id="ans" placeholder="Tulis jawabanmu" autocomplete="off" autocapitalize="off" spellcheck="false">
+      ${q.bank?`<div class="bank">${q.bank.map(w=>`<button class="chip" data-w="${w}">${w}</button>`).join('')}</div>`:''}
+      <div class="feedback" id="fb"></div>
+      <button class="btn primary wide" id="check" style="margin-top:14px">Periksa</button>
+    </div>`;
+    const inp=document.getElementById('ans');
+    body().querySelectorAll('[data-w]').forEach(c=>c.onclick=()=>{ inp.value=c.dataset.w; inp.focus(); });
+    inp.onkeydown=e=>{ if(e.key==='Enter') document.getElementById('check').click(); };
+    const full=()=>q.s.replace('___',q.a[0]).replace(/\s*\([^)]*\)/g,'').replace(/\s+([.,?!])/g,'$1').trim();
+    document.getElementById('check').onclick=()=>{
+      if(ex.answered){ nextOrFinish('write',UNIT.write.length,'Latihan menulis'); return; }
+      if(!inp.value.trim()) return;
+      const ok=q.a.some(x=>same(x,inp.value));
+      ex.answered=true; showWriteFB(ok,full(),q.a[0]);
+    };
+  } else {
+    const chips=q.w.map((w,i)=>({w,i})).sort(()=>Math.random()-.5);
+    body().innerHTML=`<div class="card">
+      ${head}
+      <div class="qtext" style="font-size:18px">Susun menjadi kalimat yang benar</div>
+      <p style="color:var(--ink-2);font-size:14px;margin:-8px 0 12px">Artinya: ${q.id}</p>
+      <div class="slot" id="slot"></div>
+      <div class="bank" id="bank">${chips.map(c=>`<button class="chip" data-i="${c.i}">${c.w}</button>`).join('')}</div>
+      <div class="feedback" id="fb"></div>
+      <div style="display:flex;gap:10px;margin-top:14px">
+        <button class="btn" id="undo">↩ Hapus</button>
+        <button class="btn primary" id="check" style="flex:1">Periksa</button>
+      </div>
+    </div>`;
+    const slot=document.getElementById('slot'); const picked=[];
+    const redraw=()=>{ slot.innerHTML=picked.map(p=>`<span class="chip" style="box-shadow:none">${q.w[p]}</span>`).join(''); };
+    body().querySelectorAll('#bank .chip').forEach(c=>c.onclick=()=>{
+      if(ex.answered) return; c.classList.add('used'); picked.push(+c.dataset.i); redraw(); beep();
+    });
+    document.getElementById('undo').onclick=()=>{
+      if(ex.answered||!picked.length) return;
+      const last=picked.pop(); redraw();
+      const el=body().querySelector(`#bank .chip[data-i="${last}"]`); if(el) el.classList.remove('used');
+    };
+    document.getElementById('check').onclick=()=>{
+      if(ex.answered){ nextOrFinish('write',UNIT.write.length,'Latihan menulis'); return; }
+      if(!picked.length) return;
+      const made=picked.map(p=>q.w[p]).join(' ');
+      const ok=same(made,q.a);
+      ex.answered=true; showWriteFB(ok,q.a,q.a);
+    };
+  }
+}
+function showWriteFB(ok,full,ansWord){
+  const fb=document.getElementById('fb');
+  fb.className='feedback on '+(ok?'good':'bad');
+  fb.innerHTML=`<b>${ok?'Benar!':'Jawaban yang tepat: '+ansWord}</b>${full}`;
+  if(ok){ ex.right++; beep('good'); } else beep('bad');
+  say(full);
+  const btn=document.getElementById('check');
+  btn.textContent='Lanjut'; btn.classList.remove('primary'); btn.classList.add('go');
+}
+
+/* ---------- 4. Bicara ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+function similarity(said,target){
+  const a=norm(said).split(' ').filter(Boolean), b=norm(target).split(' ').filter(Boolean);
+  if(!b.length) return 0;
+  const pool=[...a]; let hit=0;
+  b.forEach(w=>{ const k=pool.indexOf(w); if(k>-1){hit++; pool.splice(k,1);} });
+  return Math.round(hit/b.length*100);
+}
+function vSpeak(){
+  const q=UNIT.speak[ex.i];
+  body().innerHTML=`<div class="card" style="text-align:center">
+     <div class="qnum">Kalimat ${ex.i+1} dari ${UNIT.speak.length}</div>
+     <div class="qtext" style="margin-top:10px">${q.en}</div>
+     <p style="color:var(--ink-2);font-size:14px;margin:-8px 0 14px">${q.id}</p>
+     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+       <button class="btn" id="hear" style="font-size:14px;padding:10px 16px">🔊 Dengarkan</button>
+     </div>
+     <p style="color:var(--ink-2);font-size:14px;margin:18px 0 10px">Sekarang giliranmu. Tekan mikrofon lalu ucapkan dengan jelas.</p>
+     <button class="spk big rec" id="mic" aria-label="Rekam suara">🎤</button>
+     <div id="heard" style="color:var(--ink-2);font-size:14px;margin-top:12px;min-height:20px"></div>
+     <div class="scorebar"><div class="meter"><i id="mtr"></i></div><b id="pct" style="font-family:var(--display)">—</b></div>
+     <div class="feedback" id="fb"></div>
+     <button class="btn primary wide" id="next" style="margin-top:14px;display:none">Lanjut</button>
+   </div>
+   ${SR?'':'<p class="note">Peramban ini belum mendukung penilaian suara otomatis. Ucapkan kalimatnya dengan lantang, lalu tekan tombol mikrofon untuk lanjut.</p>'}`;
+  document.getElementById('hear').onclick=()=>say(q.en);
+  setTimeout(()=>say(q.en),350);
+  const mic=document.getElementById('mic'), fb=document.getElementById('fb'), nx=document.getElementById('next');
+  const finish=(score,heardText)=>{
+    ex.answered=true;
+    document.getElementById('mtr').style.width=score+'%';
+    document.getElementById('pct').textContent=score+'%';
+    const ok=score>=70;
+    fb.className='feedback on '+(ok?'good':'bad');
+    fb.innerHTML=`<b>${ok?(score>=90?'Sempurna!':'Bagus sekali!'):'Ayo coba sekali lagi.'}</b>${ok?'Pengucapanmu sudah jelas.':'Dengarkan contohnya sekali lagi, lalu ucapkan pelan-pelan.'}`;
+    if(heardText!==undefined) document.getElementById('heard').innerHTML=`Terdengar: “${heardText}”`;
+    if(ok){ ex.right++; beep('good'); } else beep('bad');
+    nx.style.display='block'; mic.classList.remove('live');
+  };
+  if(!SR){
+    mic.textContent='✓';
+    mic.onclick=()=>{ if(!ex.answered) finish(100); };
+  } else {
+    mic.onclick=()=>{
+      if(ex.answered) return;
+      let r; try{ r=new SR(); }catch(e){ return; }
+      r.lang='en-US'; r.interimResults=false; r.maxAlternatives=3;
+      mic.classList.add('live'); document.getElementById('heard').textContent='Mendengarkan…';
+      r.onresult=e=>{
+        const alts=[...e.results[0]].map(a=>a.transcript);
+        const best=alts.reduce((p,c)=>similarity(c,q.en)>similarity(p,q.en)?c:p,alts[0]);
+        finish(similarity(best,q.en),best);
+      };
+      r.onerror=()=>{ mic.classList.remove('live'); document.getElementById('heard').textContent=''; };
+      r.onend=()=>mic.classList.remove('live');
+      try{ r.start(); }catch(e){}
+    };
+  }
+  nx.onclick=()=>nextOrFinish('speak',UNIT.speak.length,'Latihan berbicara');
+}
+
+/* ---------- 5. Kuis ---------- */
+function vQuiz(){
+  const q=UNIT.quiz[ex.i];
+  body().innerHTML=`<div class="card">
+     <div class="qnum">Pertanyaan ${ex.i+1} dari ${UNIT.quiz.length} · Benar ${ex.right}</div>
+     <div class="qtext">${q.q}</div>
+     <div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>
+     <div class="feedback" id="fb"></div>
+     <button class="btn primary wide" id="next" style="margin-top:14px;display:none">Lanjut</button>
+   </div>`;
+  body().querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    if(ex.answered) return; ex.answered=true;
+    const ok=+b.dataset.i===q.a;
+    body().querySelectorAll('.opt').forEach((x,i)=>{ if(i===q.a)x.classList.add('right'); else if(x===b)x.classList.add('wrong'); else x.classList.add('dim'); });
+    const fb=document.getElementById('fb');
+    fb.className='feedback on '+(ok?'good':'bad');
+    fb.innerHTML=`<b>${ok?'Betul!':'Belum tepat.'}</b>${q.why}`;
+    if(ok){ ex.right++; beep('good'); } else beep('bad');
+    document.getElementById('next').style.display='block';
+  });
+  document.getElementById('next').onclick=()=>nextOrFinish('quiz',UNIT.quiz.length,'Kuis');
+}
+
+render();
+</script>
+</body>
+</html>

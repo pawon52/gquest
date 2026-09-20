@@ -52,6 +52,11 @@ p{line-height:1.65;margin:0}
 .hero h1{font-size:clamp(33px,6.4vw,54px);font-weight:700;max-width:17ch}
 .hero h1 span{color:var(--mango)}
 .hero .lead{color:#C6DCE4;font-size:clamp(16px,2.4vw,19px);max-width:52ch;margin-top:16px}
+.dev-note{display:flex;gap:10px;align-items:flex-start;max-width:56ch;margin-top:16px;
+  background:rgba(255,255,255,.06);border-left:3px solid var(--mango);border-radius:0 14px 14px 0;padding:12px 16px}
+.dev-note .dn-ic{font-size:18px;flex:none;line-height:1.4}
+.dev-note p{color:#C6DCE4;font-size:14px;line-height:1.6;margin:0}
+.dev-note p b{color:#fff;font-family:var(--display);font-weight:600}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--display);
   font-size:16.5px;font-weight:600;padding:15px 26px;border-radius:999px;transition:transform .12s,box-shadow .12s;
@@ -201,9 +206,13 @@ footer a{color:#CFE4EA}
     <span class="eyebrow">🎓 Untuk anak usia 7–12 tahun</span>
     <h1>Grammar Bahasa Inggris yang akhirnya <span>ditunggu-tunggu</span> anak</h1>
     <p class="lead">Lima belas unit terstruktur, 165 latihan, dan satu teman belajar yang memanggil nama anak Anda. Semuanya berjalan di ponsel atau tablet, juga saat sinyal sedang hilang.</p>
+    <div class="dev-note">
+      <span class="dn-ic">💬</span>
+      <p><b>Catatan dari pengembang:</b> Kami paham — waktu orang tua terbatas, grammar Inggris jadi salah satu Micro Paint Point orang tua, dan screen time anak perlu terasa bermakna. Grammar Quest dirancang agar anak bisa belajar mandiri dan terarah, rubah screen time jadi waktu belajar yang menyenangkan.</p>
+    </div>
     <div class="cta">
       <a class="btn buy" id="buyTop" href="#">Beli akses lewat WhatsApp</a>
-      <a class="btn line" href="#gate">Saya sudah punya PIN</a>
+      <a class="btn line" href="./demo.html">Coba gratis 1 unit</a>
     </div>
     <div class="crew" id="crew"></div>
     <div class="facts">
@@ -231,7 +240,7 @@ footer a{color:#CFE4EA}
 <section style="background:var(--white);border-top:2px solid var(--line);border-bottom:2px solid var(--line)">
   <div class="wrap">
     <h2 class="kicker">Tiga level, naik bertahap</h2>
-    <p class="sub narrow">Urutan materi mengikuti dan menyerupai tahapan Cambridge Young Learners dan capaian pembelajaran Bahasa Inggris Kurikulum Merdeka jenjang SD. Unit berikutnya baru terbuka setelah unit sebelumnya tuntas, supaya tidak ada yang terlewat.</p>
+    <p class="sub narrow">Urutan materi mengikuti tahapan Cambridge Young Learners dan capaian pembelajaran Bahasa Inggris Kurikulum Merdeka jenjang SD. Unit berikutnya baru terbuka setelah unit sebelumnya tuntas, supaya tidak ada yang terlewat.</p>
     <div class="grid g3">
       <div class="card lvl" style="border-top-color:#2FB37A">
         <div class="age">7–8 tahun · Pre A1 Starters</div><h3>Pulau Matahari</h3>
@@ -292,7 +301,7 @@ footer a{color:#CFE4EA}
         </ul>
       </div>
       <div style="text-align:center">
-        <div class="tag" id="priceTag">Rp52.000<small>sekali bayar, akses selamanya</small></div>
+        <div class="tag" id="priceTag">Rp149.000<small>sekali bayar, akses selamanya</small></div>
         <a class="btn buy full" id="buyMid" href="#" style="margin-top:22px">Pesan sekarang</a>
         <p style="font-size:13px;color:#8FB3BF;margin-top:14px">Balasan rata-rata di bawah 1 jam pada jam kerja.</p>
       </div>
@@ -403,8 +412,11 @@ footer a{color:#CFE4EA}
     <p style="max-width:56ch;font-size:14px;line-height:1.7">Aplikasi latihan grammar Bahasa Inggris untuk anak 7–12 tahun. Dibuat untuk dipakai berulang, di rumah maupun di kelas.</p>
     <p style="margin-top:18px;font-size:13px">
       <a href="#gate">Masuk dengan PIN</a> &nbsp;·&nbsp;
+      <a href="./demo.html">Coba gratis</a> &nbsp;·&nbsp;
       <a href="#" id="buyFoot">Pesan lewat WhatsApp</a> &nbsp;·&nbsp;
-      <a href="#confirm">Konfirmasi pembayaran</a>
+      <a href="#confirm">Konfirmasi pembayaran</a> &nbsp;·&nbsp;
+      <a href="./panduan-instal.html">Cara memasang</a> &nbsp;·&nbsp;
+      <a href="./kebijakan.html">Privasi & Refund</a>
     </p>
     <p style="margin-top:20px;font-size:12.5px;color:#6D8E9B;border-top:1px solid rgba(255,255,255,.1);padding-top:16px">
       © <span id="cyear"></span> Pawon <a id="sellerBtn" href="./admin.html">Digital</a>. Seluruh hak cipta dilindungi.
